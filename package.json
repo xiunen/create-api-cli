@@ -1,0 +1,27 @@
+{
+  "name": "create-api-cli",
+  "version": "1.0.5",
+  "description": "Create api cli",
+  "main": "scripts/cli.js",
+  "scripts": {
+    "test": "node ./scripts/cli"
+  },
+  "bin": {
+    "api": "./scripts/cli.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/xiunen/create-api-cli.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/xiunen/create-api-cli/issues"
+  },
+  "homepage": "https://github.com/xiunen/create-api-cli#readme",
+  "dependencies": {
+    "minimist": "^1.2.0"
+  },
+  "devDependencies": {}
+}

@@ -59,3 +59,10 @@ typings/
 
 # next.js build output
 .next
+
+.repo
+
+app/
+db/
+.sequelizerc
+api.lock.json
