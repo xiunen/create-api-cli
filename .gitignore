@@ -64,5 +64,6 @@ typings/
 
 app/
 db/
+config/
 .sequelizerc
 api.lock.json

@@ -8,10 +8,6 @@ const cwd = process.cwd()
 const repo = `https://github.com/xiunen/awesome-api.git`;
 const repoDir = path.join(__dirname, '../.repo')
 
-const repoExist = fs.existsSync(`${repoDir}/package.json`)
-if (!repoExist) {
-  childProcess.spawn('git', ['clone', repo, repoDir])
-}
 
 let lock = {};
 const lockDir = `${cwd}/api.lock.json`
@@ -143,38 +139,54 @@ const install = (force) => {
   copyIndex(force)
 }
 
-const argv = require('minimist')(process.argv.slice(2));
-const force = argv.f
-const cmds = argv._
 
-if (!cmds.length) {
-  install(force)
+const start = () => {
+  const argv = require('minimist')(process.argv.slice(2));
+  const force = argv.f
+  const cmds = argv._
+
+  if (!cmds.length) {
+    install(force)
+  } else {
+    if (cmds.includes('config')) {
+      copyConfig(force)
+    }
+
+
+    if (cmds.includes('migration')) {
+      copyMigration(force)
+    }
+
+
+    if (cmds.includes('model')) {
+      copyModel(force)
+    }
+
+
+    if (cmds.includes('router')) {
+      copyRouter(force)
+    }
+
+
+    if (cmds.includes('controller')) {
+      copyController(force)
+    }
+
+    if (cmds.includes('index')) {
+      copyIndex(force)
+    }
+  }
+}
+
+
+const repoExist = fs.existsSync(`${repoDir}/package.json`)
+if (!repoExist) {
+  const git = childProcess.spawn('git', ['clone', repo, repoDir])
+  git.on('close', code => {
+    if (!code) {
+      start()
+    }
+  })
 } else {
-  if (cmds.includes('config')) {
-    copyConfig(force)
-  }
-
-
-  if (cmds.includes('migration')) {
-    copyMigration(force)
-  }
-
-
-  if (cmds.includes('model')) {
-    copyModel(force)
-  }
-
-
-  if (cmds.includes('router')) {
-    copyRouter(force)
-  }
-
-
-  if (cmds.includes('controller')) {
-    copyController(force)
-  }
-
-  if (cmds.includes('index')) {
-    copyIndex(force)
-  }
+  start();
 }
