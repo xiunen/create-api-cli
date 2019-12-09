@@ -29,7 +29,7 @@ const mkdir = (dirs = []) => {
     const subdir = dirs.slice(0, i + 1).join('/')
     const dir = path.join(cwd, subdir)
     if (!fs.existsSync(dir)) {
-      fs.mkdir(dir)
+      fs.mkdirSync(dir)
     }
   }
 }
