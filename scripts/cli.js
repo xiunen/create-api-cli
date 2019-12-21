@@ -4,8 +4,11 @@ const path = require('path')
 const fs = require('fs')
 const childProcess = require('child_process')
 const cwd = process.cwd()
+const minimist = require('minimist')
+const argv = minimist(process.argv.slice(2));
+const isSimple = argv.simple
+const repo = `https://github.com/xiunen/awesome-api${isSimple?'-simple':''}.git`;
 
-const repo = `https://github.com/xiunen/awesome-api.git`;
 const repoDir = path.join(__dirname, '../.repo')
 
 
@@ -141,10 +144,8 @@ const install = (force) => {
 
 
 const start = () => {
-  const argv = require('minimist')(process.argv.slice(2));
   const force = argv.f
   const cmds = argv._
-
   if (!cmds.length) {
     install(force)
   } else {

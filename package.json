@@ -1,6 +1,6 @@
 {
 	"name": "create-api-cli",
-	"version": "1.0.7",
+	"version": "1.0.8",
 	"description": "Create api cli",
 	"main": "scripts/cli.js",
 	"scripts": {
